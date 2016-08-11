@@ -24,6 +24,8 @@
 
     <!-- android -->
     <platform name="android">
+        <source-file src="src/android/libs/iText.jar" target-dir="libs" />
+    
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Html2pdf" >
                 <param name="android-package" value="th.azay.cordova.plugin.html2pdf.Html2pdf"/>
