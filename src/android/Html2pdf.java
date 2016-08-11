@@ -131,7 +131,7 @@ public class Html2pdf extends CordovaPlugin {
         // Don´t auto-scale the content to the webview's width.
         page.getSettings().setLoadWithOverviewMode(true);
         page.getSettings().setUseWideViewPort(true);
-        page.setInitialScale(100);
+        page.setInitialScale(300);
         // Disable android text auto fit behaviour
         page.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
@@ -269,7 +269,7 @@ public class Html2pdf extends CordovaPlugin {
             }
 
             double pageWidth = PageSize.A4.getWidth();//  * 0.85; // width of the image is 85% of the page
-            double pageHeight = PageSize.A4.getHeight() * 0.79; // max height of the image is 80% of the page
+            double pageHeight = PageSize.A4.getHeight();// * 0.79; // max height of the image is 80% of the page
             double pageHeightToWithRelation = pageHeight / pageWidth; // e.g.: 1.33 (4/3)
 
             Bitmap currPage;
