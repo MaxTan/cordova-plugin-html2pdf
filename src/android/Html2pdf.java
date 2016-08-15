@@ -131,7 +131,7 @@ public class Html2pdf extends CordovaPlugin {
         // Don´t auto-scale the content to the webview's width.
         page.getSettings().setLoadWithOverviewMode(true);
         page.getSettings().setUseWideViewPort(true);
-        page.setInitialScale(300);
+        page.setInitialScale(100);
         // Disable android text auto fit behaviour
         page.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
@@ -204,7 +204,7 @@ public class Html2pdf extends CordovaPlugin {
     /**
      * Takes a WebView and returns a Bitmap representation of it (takes a "screenshot").
      *
-     * @param WebView
+     * @param view
      * @return Bitmap
      */
     Bitmap getWebViewAsBitmap(WebView view) {
@@ -213,7 +213,6 @@ public class Html2pdf extends CordovaPlugin {
         // prepare drawing cache
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
-
         //Get the dimensions of the view so we can re-layout the view at its current size
         //and create a bitmap of the same size
         int width = ((Html2PdfWebView) view).getContentWidth();
@@ -254,10 +253,7 @@ public class Html2pdf extends CordovaPlugin {
         try {
 
             File sdCard = Environment.getExternalStorageDirectory();
-            //Log.v(LOG_TAG,sdCard);
-            //File dir = new File (sdCard.getAbsolutePath() + "/" + this.publicTmpDir + "/");
             File dir = new File(sdCard.getAbsolutePath() + "/" + this.publicTmpDir + "/");
-            //Log.i(LOG_TAG,dir);
             dir.mkdirs();
             File file;
             FileOutputStream stream;
@@ -268,8 +264,8 @@ public class Html2pdf extends CordovaPlugin {
                 noMediaFile.createNewFile();
             }
 
-            double pageWidth = PageSize.A4.getWidth();//  * 0.85; // width of the image is 85% of the page
-            double pageHeight = PageSize.A4.getHeight();// * 0.79; // max height of the image is 80% of the page
+            double pageWidth = PageSize.A4.getWidth();// * 0.85; // width of the image is 85% of the page
+            double pageHeight = PageSize.A4.getHeight();// * 0.8; // max height of the image is 80% of the page
             double pageHeightToWithRelation = pageHeight / pageWidth; // e.g.: 1.33 (4/3)
 
             Bitmap currPage;
@@ -285,8 +281,7 @@ public class Html2pdf extends CordovaPlugin {
                 Log.v(LOG_TAG, "Creating page nr. " + currPageCount);
 
                 // slice bitmap
-                currPage = Bitmap.createBitmap(screenshot, 0, currPos, sliceWidth, (int) Math.min(sliceHeight, totalSize - currPos));
-
+                currPage = Bitmap.createBitmap(screenshot, 0, currPos, sliceWidth, Math.min(sliceHeight, totalSize - currPos));
                 // save page as png
                 stream = new FileOutputStream(new File(dir, "pdf-page-" + currPageCount + ".png"));
                 currPage.compress(Bitmap.CompressFormat.PNG, 100, stream);
