@@ -253,7 +253,7 @@ public class Html2pdf extends CordovaPlugin {
             }
 
             double pageWidth = PageSize.A4.getWidth();// * 0.85; // width of the image is 85% of the page
-            double pageHeight = PageSize.A4.getHeight();// * 0.8; // max height of the image is 80% of the page
+            double pageHeight = PageSize.A4.getHeight() * 0.92; // max height of the image is 80% of the page
             double pageHeightToWithRelation = pageHeight / pageWidth; // e.g.: 1.33 (4/3)
 
             Bitmap currPage;
