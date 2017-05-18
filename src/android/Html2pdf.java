@@ -94,7 +94,6 @@ public class Html2pdf extends CordovaPlugin {
         }
     }
 
-
     /**
      * Clean up and close all open files.
      */
@@ -106,7 +105,6 @@ public class Html2pdf extends CordovaPlugin {
     // --------------------------------------------------------------------------
     // LOCAL METHODS
     // --------------------------------------------------------------------------
-
 
     /**
      * Loads the html content into a WebView, saves it as a single multi page pdf file and
@@ -120,11 +118,7 @@ public class Html2pdf extends CordovaPlugin {
         page.setVerticalScrollBarEnabled(false);
         page.setHorizontalScrollBarEnabled(false);
 
-        if (showWebViewForDebugging) {
-            page.setVisibility(View.VISIBLE);
-        } else {
-            page.setVisibility(View.INVISIBLE);
-        }
+        page.setVisibility(View.VISIBLE);
 
         page.getSettings().setJavaScriptEnabled(true);
         page.setDrawingCacheEnabled(true);
@@ -179,15 +173,9 @@ public class Html2pdf extends CordovaPlugin {
          *  Making it small in the beginning has some effects on the html <body> (body
          *  width will always remain 100 if not set explicitly).
          */
-        if (!showWebViewForDebugging) {
-            ctx.addContentView(page, new ViewGroup.LayoutParams(100, 100));
-        } else {
-            ctx.addContentView(page, new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        }
+        ctx.addContentView(page, new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
     }
-
-    public static final String MIME_TYPE_PDF = "application/pdf";
 
     /**
      * Check if the supplied context can handle the given intent.
@@ -281,7 +269,8 @@ public class Html2pdf extends CordovaPlugin {
                 Log.v(LOG_TAG, "Creating page nr. " + currPageCount);
 
                 // slice bitmap
-                currPage = Bitmap.createBitmap(screenshot, 0, currPos, sliceWidth, Math.min(sliceHeight, totalSize - currPos));
+                currPage = Bitmap.createBitmap(screenshot, 0, currPos, sliceWidth,
+                        Math.min(sliceHeight, totalSize - currPos));
                 // save page as png
                 stream = new FileOutputStream(new File(dir, "pdf-page-" + currPageCount + ".png"));
                 currPage.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -336,7 +325,6 @@ public class Html2pdf extends CordovaPlugin {
 
         return null;
     }
-
 
 }
 
