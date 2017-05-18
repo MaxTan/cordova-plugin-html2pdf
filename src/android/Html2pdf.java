@@ -118,7 +118,7 @@ public class Html2pdf extends CordovaPlugin {
         page.setVerticalScrollBarEnabled(false);
         page.setHorizontalScrollBarEnabled(false);
 
-        page.setVisibility(View.VISIBLE);
+        page.setVisibility(View.INVISIBLE);
 
         page.getSettings().setJavaScriptEnabled(true);
         page.setDrawingCacheEnabled(true);
